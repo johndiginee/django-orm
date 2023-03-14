@@ -2,3 +2,4 @@
 
 * OR-queries
 * AND-queries
+* UNION query

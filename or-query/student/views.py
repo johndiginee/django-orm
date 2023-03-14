@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Student
+from .models import Student, Teacher
 from django.db import connection
 from django.db.models import Q
 
@@ -31,8 +31,8 @@ def student_list(request):
 
     return render(request, 'output.html',{'posts':posts})
 
-# Part 2
-### AND query##############################################################
+# Part 3 
+### AND query ##############################################################
 
 def student_list(request):
     posts = Student.objects.filter(classroom=1) & Student.objects.filter(age=20)
@@ -40,4 +40,15 @@ def student_list(request):
     print(posts)
     print(connection.queries)
 
+    return render(request, 'output.html',{'posts':posts})
+
+# Part 4
+### UNION query ##############################################################
+
+def student_list(request):
+
+    posts = Student.objects.all().values_list("firstname").union(Teacher.objects.all().values_list("firstname"))
+
+    print(posts)
+    print(connection.queries)
     return render(request, 'output.html',{'posts':posts})
