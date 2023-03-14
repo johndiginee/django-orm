@@ -30,3 +30,14 @@ def student_list(request):
     print(connection.queries)
 
     return render(request, 'output.html',{'posts':posts})
+
+# Part 2
+### AND query##############################################################
+
+def student_list(request):
+    posts = Student.objects.filter(classroom=1) & Student.objects.filter(age=20)
+
+    print(posts)
+    print(connection.queries)
+
+    return render(request, 'output.html',{'posts':posts})
