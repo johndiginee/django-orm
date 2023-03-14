@@ -74,10 +74,29 @@ def student_list_(request):
 # Part 6
 ### Select and Output Individual Fields  ##############################################################
 
-def student_list(request):
+def student_list_(request):
 
-    posts = Student.objects.all().only('firstname', 'age')
+    posts = Student.objects.filter().only('firstname', 'age')
 
     print(posts)
     print(connection.queries)
+    return render(request, 'output.html',{'data':posts})
+
+
+# Part 7
+### Performing Raw SQL Queries  ##############################################################
+
+def student_list(request):
+
+    # posts = Student.objects.all()
+
+    sql = "SELECT * FROM student_student"
+    posts = Student.objects.raw(sql)[:2]
+
+    # for s in Student.objects.raw("SELECT * FROM student_student"): 
+    #     print(s)
+        
+
+    # print(posts)
+    # print(connection.queries)
     return render(request, 'output.html',{'data':posts})
