@@ -56,7 +56,7 @@ def student_list_(request):
 # Part 5
 ### NOT query ##############################################################
 
-def student_list(request):
+def student_list_(request):
 
     posts = Student.objects.exclude(age__gt=20)
     # posts = Student.objects.exclude(age=20) & Student.objects.exclude(firstname__startswith='raquel')
@@ -70,3 +70,14 @@ def student_list(request):
     print(connection.queries)
     return render(request, 'output.html',{'posts':posts})
 
+
+# Part 6
+### Select and Output Individual Fields  ##############################################################
+
+def student_list(request):
+
+    posts = Student.objects.all().only('firstname', 'age')
+
+    print(posts)
+    print(connection.queries)
+    return render(request, 'output.html',{'data':posts})
