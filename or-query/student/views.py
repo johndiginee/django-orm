@@ -34,7 +34,7 @@ def student_list(request):
 # Part 3 
 ### AND query ##############################################################
 
-def student_list(request):
+def student_list_(request):
     posts = Student.objects.filter(classroom=1) & Student.objects.filter(age=20)
 
     print(posts)
@@ -45,10 +45,28 @@ def student_list(request):
 # Part 4
 ### UNION query ##############################################################
 
-def student_list(request):
+def student_list_(request):
 
     posts = Student.objects.all().values_list("firstname").union(Teacher.objects.all().values_list("firstname"))
 
     print(posts)
     print(connection.queries)
     return render(request, 'output.html',{'posts':posts})
+
+# Part 5
+### NOT query ##############################################################
+
+def student_list(request):
+
+    posts = Student.objects.exclude(age__gt=20)
+    # posts = Student.objects.exclude(age=20) & Student.objects.exclude(firstname__startswith='raquel')
+
+    # gt
+    # gte
+    # lt
+    # lte
+
+    print(posts)
+    print(connection.queries)
+    return render(request, 'output.html',{'posts':posts})
+

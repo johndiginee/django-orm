@@ -3,3 +3,6 @@
 * OR-queries
 * AND-queries
 * UNION query
+
+
+Django QuerySet API reference > https://docs.djangoproject.com/en/4.1/ref/models/querysets/
