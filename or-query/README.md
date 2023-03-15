@@ -6,6 +6,7 @@
 * NOT query
 * Select and Output Individual Fields 
 * Performing Raw SQL Queries
+* Performing Custom SQL Directly
 
 
 Django QuerySet API reference > https://docs.djangoproject.com/en/4.1/ref/models/querysets/

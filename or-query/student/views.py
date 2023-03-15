@@ -86,7 +86,7 @@ def student_list_(request):
 # Part 7
 ### Performing Raw SQL Queries  ##############################################################
 
-def student_list(request):
+def student_list_(request):
 
     # posts = Student.objects.all()
 
@@ -100,3 +100,22 @@ def student_list(request):
     # print(posts)
     # print(connection.queries)
     return render(request, 'output.html',{'data':posts})
+
+
+# Part 8
+### Bypassing ORM  ##############################################################
+
+def dictfetchall(cursor):
+    desc = cursor.description
+    return [
+        dict(zip([col[0] for col in desc], row))
+        for row in cursor.fetchall()
+    ]
+def student_list(request):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM student_student WHERE age >20")
+    r = dictfetchall(cursor)
+    
+    print(connection.queries)
+
+    return render(request, 'output.html',{'data':r})
